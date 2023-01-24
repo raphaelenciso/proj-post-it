@@ -18,7 +18,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      posts: JSON.stringify(posts),
+      posts,
     },
   };
 }
@@ -27,7 +27,7 @@ export default function Index({ posts }) {
   return (
     <Box sx={{ backgroundColor: "#EEF0F1" }}>
       <Navbar />
-      <Posts posts={JSON.parse(posts)} />
+      <Posts posts={posts} />
     </Box>
   );
 }
