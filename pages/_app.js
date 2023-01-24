@@ -19,6 +19,7 @@ export default function MyApp(props) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Post It</title>
+        <link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
       </Head>
       <AuthContextProvider>
         <ThemeProvider theme={theme}>

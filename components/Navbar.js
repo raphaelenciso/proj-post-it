@@ -117,12 +117,12 @@ export default function Navbar() {
                 >
                   Logout
                 </Button>
-                <Link href={`/${currentUser.uid}`}>
-                  <Avatar
-                    src={currentUser.photoURL}
-                    sx={{ height: "50px", width: "50px" }}
-                  />
-                </Link>
+                {/* <Link href={`/${currentUser.uid}`}> */}
+                <Avatar
+                  src={currentUser.photoURL}
+                  sx={{ height: "50px", width: "50px" }}
+                />
+                {/* </Link> */}
               </StyledBox>
             ) : (
               <Button
