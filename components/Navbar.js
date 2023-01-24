@@ -64,13 +64,15 @@ export default function Navbar() {
         <Container maxWidth="lg">
           <StyledToolbar>
             <StyledBox>
-              <Image
-                src={faviconLogo}
-                width={50}
-                height={50}
-                style={{ marginRight: "1rem" }}
-                alt="avatar"
-              />
+              <Link href="/" sx={{ display: "flex", alignItems: "center" }}>
+                <Image
+                  src={faviconLogo}
+                  width={50}
+                  height={50}
+                  style={{ marginRight: "1rem" }}
+                  alt="avatar"
+                />
+              </Link>
               <Typography
                 variant="h4"
                 component="a"

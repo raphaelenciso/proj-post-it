@@ -6,27 +6,55 @@ import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
 
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function PostCard({ post }) {
+  const { currentUser } = useContext(AuthContext);
   const router = useRouter();
 
-  const { displayName, photoURL, postMessage, userUid, dateCreated } = post;
+  console.log(currentUser);
+
+  const {
+    displayName,
+    photoURL,
+    postMessage,
+    userUid,
+    dateCreated,
+    postFocus,
+    id,
+  } = post;
 
   return (
-    <Card variant="outlined">
-      <CardHeader
-        avatar={<Avatar src={photoURL} />}
-        title={displayName}
-        subheader={dateCreated}
-        onClick={() => router.push(`/${userUid}`)}
-        action={false && <Button>Edit</Button>}
-      />
+    <>
+      {post && (
+        <Card variant="outlined">
+          <CardHeader
+            avatar={
+              <Avatar
+                src={photoURL}
+                onClick={() => router.push(`/${userUid}`)}
+              />
+            }
+            title={displayName}
+            subheader={dateCreated}
+            action={
+              postFocus &&
+              currentUser.uid === userUid && (
+                <Button onClick={(e) => console.log("qwe")}>Edit</Button>
+              )
+            }
+          />
 
-      <CardContent onClick={(e) => router.push(`/${userUid}/postid`)}>
-        <Typography variant="body2" color="text.secondary">
-          {postMessage}
-        </Typography>
-      </CardContent>
-    </Card>
+          <CardContent
+            onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
+          >
+            <Typography variant="body2" color="text.secondary">
+              {postMessage}
+            </Typography>
+          </CardContent>
+        </Card>
+      )}
+    </>
   );
 }
