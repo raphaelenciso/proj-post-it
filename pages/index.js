@@ -6,25 +6,25 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../lib/firebase";
 
 export async function getServerSideProps() {
-  try {
-    const res = await getDocs(
-      query(collection(db, "posts"), orderBy("dateCreated", "desc"))
-    );
+  const res = await getDocs(
+    query(collection(db, "posts"), orderBy("dateCreated", "desc"))
+  );
 
-    const posts = res.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
-    });
-
+  if (!res) {
     return {
-      props: {
-        posts,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {},
+      notFound: true,
     };
   }
+
+  const posts = res.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
+
+  return {
+    props: {
+      posts,
+    },
+  };
 }
 
 export default function Index({ posts }) {
