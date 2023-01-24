@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 
 import { useRouter } from "next/router";
 import { useContext } from "react";
@@ -47,7 +47,7 @@ export default function PostCard({ post }) {
           />
 
           <CardContent
-            onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
+          // onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
           >
             <Typography variant="body2" color="text.secondary">
               {postMessage}

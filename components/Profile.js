@@ -1,12 +1,10 @@
-import {
-  Avatar,
-  Box,
-  Card,
-  CardHeader,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import PostCard from "./PostCard";
 
 const Profile = ({ displayName, photoURL }) => {

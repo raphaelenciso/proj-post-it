@@ -1,8 +1,6 @@
-import { Box } from "@mui/material";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Navbar from "../components/Navbar";
 import Posts from "../components/Posts";
-import Link from "../src/Link";
 
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../lib/firebase";
