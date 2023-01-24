@@ -55,7 +55,7 @@ export default function PostItModal({ modalOpen, setModalOpen }) {
       setPostDetails("");
       router.push("/");
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

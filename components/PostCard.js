@@ -13,8 +13,6 @@ export default function PostCard({ post }) {
   const { currentUser } = useContext(AuthContext);
   const router = useRouter();
 
-  console.log(currentUser);
-
   const {
     displayName,
     photoURL,
