@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 
 export default function Posts({ posts }) {
   return (
-    <Container maxWidth="lg" sx={{ marginTop: "1rem", height: "100vh" }}>
+    <Container maxWidth="lg" sx={{ marginTop: "1rem", minHeight: "100vh" }}>
       <Stack gap={2}>
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
