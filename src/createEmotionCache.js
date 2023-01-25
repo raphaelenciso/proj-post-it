@@ -15,5 +15,5 @@ export default function createEmotionCache() {
     insertionPoint = emotionInsertionPoint ?? undefined;
   }
 
-  return createCache({ key: "css", insertionPoint });
+  return createCache({ key: "css", prepend: true, insertionPoint });
 }

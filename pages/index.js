@@ -30,14 +30,14 @@ export async function getServerSideProps() {
 
 export default function Index({ posts }) {
   return (
-    <Box sx={{ backgroundColor: "#EEF0F1" }}>
-      <Navbar />
-      {posts && <Posts posts={posts} />}
-    </Box>
-    // <div>
-    //   {posts.map((post) => {
-    //     <h1>{post.postMessage}</h1>;
-    //   })}
-    // </div>
+    <div>
+      {posts.map((post) => {
+        return <h1>{post.postMessage}</h1>;
+      })}
+    </div>
+    // <Box sx={{ backgroundColor: "#EEF0F1" }}>
+    //   <Navbar />
+    //   {posts && <Posts posts={posts} />}
+    // </Box>
   );
 }
