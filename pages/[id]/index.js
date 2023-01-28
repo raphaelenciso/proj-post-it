@@ -29,6 +29,7 @@ const Index = ({ user }) => {
   return (
     <Box sx={{ backgroundColor: "#EEF0F1" }}>
       <Navbar />
+
       <Profile displayName={displayName} photoURL={photoURL} />
     </Box>
   );

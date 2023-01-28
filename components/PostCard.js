@@ -6,12 +6,17 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import PostItModal from "./PostItModal";
 
 export default function PostCard({ post }) {
   const { currentUser } = useContext(AuthContext);
   const router = useRouter();
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const {
     displayName,
@@ -23,20 +28,49 @@ export default function PostCard({ post }) {
     id,
   } = post;
 
+  const handleDelete = async () => {
+    try {
+      await deleteDoc(doc(db, "posts", id));
+
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleEdit = async () => {
+    setModalOpen(true);
+    // try {
+    //   router.push("/");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
   return (
     <>
       {post && (
         <Card variant="outlined">
+          {modalOpen && (
+            <PostItModal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              edit={true}
+              postMessage={postMessage}
+              postId={id}
+              userUid={userUid}
+            />
+          )}
           <CardHeader
             avatar={
               <Avatar
                 src={photoURL}
-                onClick={() => router.push(`/${userUid}`)}
                 sx={{
                   "&:hover": {
                     cursor: "pointer",
                   },
                 }}
+                onClick={() => router.push(`/${userUid}`)}
               />
             }
             title={displayName}
@@ -44,18 +78,19 @@ export default function PostCard({ post }) {
             action={
               postFocus &&
               currentUser.uid === userUid && (
-                <Button onClick={(e) => console.log("qwe")}>Edit</Button>
+                <>
+                  <Button variant="warning" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                  <Button onClick={handleEdit}>Edit</Button>
+                </>
               )
             }
-            sx={{
-              "& .MuiCardHeader-title": {
-                cursor: "pointer",
-              },
-            }}
           />
 
           <CardContent
             onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
+            sx={{ cursor: "pointer" }}
           >
             <Typography variant="body2" color="text.secondary">
               {postMessage}

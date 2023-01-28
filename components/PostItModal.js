@@ -10,12 +10,14 @@ import Stack from "@mui/material/Stack";
 //MUI STYLED
 import styled from "@mui/system/styled";
 import { AuthContext } from "../context/AuthContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import {
   addDoc,
   collection,
+  doc,
   serverTimestamp,
   Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useRouter } from "next/router";
@@ -33,11 +35,24 @@ const UserBox = styled(Box)({
   marginBottom: "20px",
 });
 
-export default function PostItModal({ modalOpen, setModalOpen }) {
+export default function PostItModal({
+  modalOpen,
+  setModalOpen,
+  edit,
+  postMessage,
+  postId,
+  userUid,
+}) {
   const router = useRouter();
 
   const { currentUser } = useContext(AuthContext);
   const [postDetails, setPostDetails] = useState("");
+
+  useEffect(() => {
+    if (edit) {
+      setPostDetails(postMessage);
+    }
+  }, []);
 
   const postData = async () => {
     try {
@@ -57,10 +72,25 @@ export default function PostItModal({ modalOpen, setModalOpen }) {
     }
   };
 
+  const editPost = async () => {
+    try {
+      await updateDoc(doc(db, "posts", postId), {
+        postMessage: postDetails,
+        latestEdit: new Date().toLocaleString(),
+      });
+
+      setModalOpen(false);
+      setPostDetails("");
+      router.push(`/${userUid}/${postId}`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <StyledModal open={modalOpen} onClose={(e) => setModalOpen(false)}>
       <Box
-        width={550}
+        width={520}
         height={330}
         p="20px 25px"
         borderRadius={5}
@@ -68,7 +98,7 @@ export default function PostItModal({ modalOpen, setModalOpen }) {
         color={"text.primary"}
       >
         <Typography variant="h5" color="gray" textAlign="center" mb={1}>
-          Post It
+          {edit ? "Edit" : "Post It"}
         </Typography>
         <UserBox>
           <Avatar src={currentUser.photoURL} />
@@ -88,10 +118,10 @@ export default function PostItModal({ modalOpen, setModalOpen }) {
           variant="contained"
           size="large"
           fullWidth
-          onClick={postData}
+          onClick={edit ? editPost : postData}
           disabled={postDetails.length > 80 && true}
         >
-          Post
+          {edit ? "Save" : "Post"}
         </Button>
       </Box>
     </StyledModal>
