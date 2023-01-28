@@ -19,7 +19,8 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { Router } from "@mui/icons-material";
+
+import { useRouter } from "next/router";
 
 const StyledModal = styled(Modal)({
   display: "flex",
