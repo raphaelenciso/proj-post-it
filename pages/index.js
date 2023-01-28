@@ -40,7 +40,7 @@ export default function Index({ posts }) {
     <Box sx={{ backgroundColor: "#EEF0F1" }}>
       <Navbar />
       {currentUser ? (
-        posts && <Posts posts={posts} />
+        <Posts posts={posts} />
       ) : (
         <Container maxWidth="lg" sx={{ height: "100vh" }}>
           <Card
