@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import PostCard from "./PostCard";
 
-const Profile = ({ displayName, photoURL }) => {
+const Profile = ({ displayName, photoURL, userPosts }) => {
   return (
     <>
       {displayName && (
@@ -29,11 +29,14 @@ const Profile = ({ displayName, photoURL }) => {
             <Avatar src={photoURL} sx={{ width: "100px", height: "100px" }} />
             <Typography variant="h4">{displayName}</Typography>
           </Card>
-          {/* <Stack gap={2}>
-        <PostCard />
-        <PostCard />
-        <PostCard />
-      </Stack> */}
+          {userPosts.length !== 0 && (
+            <Stack gap={2}>
+              <Typography variant="h4">Posts:</Typography>
+              {userPosts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </Stack>
+          )}
         </Container>
       )}
     </>
