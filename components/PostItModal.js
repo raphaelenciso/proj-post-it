@@ -19,7 +19,6 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
-
 import { useRouter } from "next/router";
 
 const StyledModal = styled(Modal)({
