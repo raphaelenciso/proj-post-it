@@ -4,33 +4,30 @@ import Posts from "../components/Posts";
 
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { useEffect, useState } from "react";
 
-export default function Index() {
-  const [posts, setPosts] = useState("");
+export async function getServerSideProps() {
+  const res = await getDocs(
+    query(collection(db, "posts"), orderBy("dateCreated", "desc"))
+  );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getDocs(
-        query(collection(db, "posts"), orderBy("dateCreated", "desc"))
-      );
-
-      if (!res) {
-        return {
-          notFound: true,
-        };
-      }
-
-      const fetchedPosts = res.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-
-      setPosts(fetchedPosts);
+  if (!res) {
+    return {
+      notFound: true,
     };
+  }
 
-    fetchData();
-  }, []);
+  const posts = res.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
 
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
+export default function Index({ posts }) {
   return (
     <Box sx={{ backgroundColor: "#EEF0F1" }}>
       <Navbar />
