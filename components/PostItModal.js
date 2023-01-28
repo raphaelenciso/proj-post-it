@@ -10,7 +10,6 @@ import Stack from "@mui/material/Stack";
 //MUI STYLED
 import styled from "@mui/system/styled";
 import { AuthContext } from "../context/AuthContext";
-
 import { useContext, useState } from "react";
 import {
   addDoc,

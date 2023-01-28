@@ -45,7 +45,7 @@ export default function PostCard({ post }) {
           />
 
           <CardContent
-          // onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
+            onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
           >
             <Typography variant="body2" color="text.secondary">
               {postMessage}
