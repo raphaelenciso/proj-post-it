@@ -9,10 +9,10 @@ import createEmotionCache from "../src/createEmotionCache";
 import { AuthContextProvider } from "../context/AuthContext";
 
 // Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
+const emotionCache = createEmotionCache();
 
 export default function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { Component, pageProps } = props;
 
   return (
     <CacheProvider value={emotionCache}>
