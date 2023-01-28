@@ -16,12 +16,6 @@ export async function getServerSideProps() {
     query(collection(db, "posts"), orderBy("dateCreated", "desc"))
   );
 
-  if (!res) {
-    return {
-      notFound: true,
-    };
-  }
-
   const posts = res.docs.map((doc) => {
     return { id: doc.id, ...doc.data() };
   });
