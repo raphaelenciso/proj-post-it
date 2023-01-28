@@ -32,6 +32,11 @@ export default function PostCard({ post }) {
               <Avatar
                 src={photoURL}
                 onClick={() => router.push(`/${userUid}`)}
+                sx={{
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
               />
             }
             title={displayName}
@@ -42,6 +47,11 @@ export default function PostCard({ post }) {
                 <Button onClick={(e) => console.log("qwe")}>Edit</Button>
               )
             }
+            sx={{
+              "& .MuiCardHeader-title": {
+                cursor: "pointer",
+              },
+            }}
           />
 
           <CardContent

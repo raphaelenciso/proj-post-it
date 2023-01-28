@@ -64,7 +64,7 @@ export default function Navbar() {
       )}
       <AppBar position="sticky">
         <Container maxWidth="lg">
-          <StyledToolbar>
+          <StyledToolbar disableGutters>
             <StyledBox>
               <Link href="/" sx={{ display: "flex", alignItems: "center" }}>
                 <Image

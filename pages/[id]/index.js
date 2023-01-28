@@ -11,6 +11,11 @@ export async function getServerSideProps(props) {
     query(collection(db, "users"), where("uid", "==", props.query.id))
   );
 
+  if (!res) {
+    return {
+      notFound: true,
+    };
+  }
   const user = res.docs[0].data();
 
   return {
