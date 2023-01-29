@@ -7,12 +7,13 @@ import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import GoogleIcon from "@mui/icons-material/Google";
 import styled from "@mui/system/styled";
 
 import { signInWithPopup, signOut } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
-import faviconLogo from "../public/favicon.ico";
+import faviconLogo from "../public/favicon.svg";
 import PostItModal from "./PostItModal";
 import Link from "../src/Link";
 import { auth, provider, db } from "../lib/firebase";
@@ -141,6 +142,7 @@ export default function Navbar() {
                 disableElevation
                 size="large"
                 onClick={login}
+                startIcon={<GoogleIcon />}
                 sx={{
                   "&:hover": {
                     backgroundColor: "primary.main",
