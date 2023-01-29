@@ -9,17 +9,15 @@ import createEmotionCache from "../src/createEmotionCache";
 import { AuthContextProvider } from "../context/AuthContext";
 
 // Client-side cache, shared for the whole session of the user in the browser.
-const emotionCache = createEmotionCache();
+const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
-  const { Component, pageProps } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>Post It</title>
-        <link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
       </Head>
       <AuthContextProvider>
         <ThemeProvider theme={theme}>
