@@ -31,6 +31,12 @@ const StyledBox = styled(Box)({
   alignItems: "center",
 });
 
+const StyledButton = styled(Button)({
+  "&:hover": {
+    textDecoration: "underline",
+  },
+});
+
 export default function Navbar() {
   const { currentUser } = useContext(AuthContext);
 
@@ -62,7 +68,7 @@ export default function Navbar() {
       {currentUser && (
         <PostItModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       )}
-      <AppBar position="sticky">
+      <AppBar position="sticky" color="inherit" elevation={2}>
         <Container maxWidth="lg">
           <StyledToolbar disableGutters>
             <StyledBox>
@@ -94,29 +100,34 @@ export default function Navbar() {
             </StyledBox>
             {currentUser ? (
               <StyledBox sx={{ gap: "1rem" }}>
-                <Button
-                  variant="contained"
+                <StyledButton
+                  variant="outlined"
                   disableElevation
                   size="large"
-                  sx={{
-                    backgroundColor: "primary.light",
-                  }}
                   onClick={(e) => setModalOpen(true)}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "primary.500",
+                      color: "primary.contrastText",
+                    },
+                  }}
                 >
                   Post
-                </Button>
-                <Button
-                  variant="contained"
+                </StyledButton>
+                <StyledButton
+                  variant="text"
                   color="secondary"
                   disableElevation
                   size="large"
-                  sx={{
-                    backgroundColor: "secondary.light",
-                  }}
                   onClick={logout}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#fbe9e7",
+                    },
+                  }}
                 >
                   Logout
-                </Button>
+                </StyledButton>
                 <Link href={`/${currentUser.uid}`}>
                   <Avatar
                     src={currentUser.photoURL}
@@ -125,17 +136,20 @@ export default function Navbar() {
                 </Link>
               </StyledBox>
             ) : (
-              <Button
-                variant="contained"
+              <StyledButton
+                variant="outlined"
                 disableElevation
                 size="large"
-                sx={{
-                  backgroundColor: "primary.light",
-                }}
                 onClick={login}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "primary.main",
+                    color: "primary.contrastText",
+                  },
+                }}
               >
                 Login
-              </Button>
+              </StyledButton>
             )}
           </StyledToolbar>
         </Container>

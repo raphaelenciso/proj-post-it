@@ -11,14 +11,7 @@ import Stack from "@mui/material/Stack";
 import styled from "@mui/system/styled";
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useState, useEffect } from "react";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useRouter } from "next/router";
 
@@ -61,7 +54,7 @@ export default function PostItModal({
         displayName: currentUser.displayName,
         photoURL: currentUser.photoURL,
         postMessage: postDetails,
-        dateCreated: new Date().toLocaleString(),
+        dateCreated: new Date().toISOString(),
       });
 
       setModalOpen(false);
@@ -76,7 +69,7 @@ export default function PostItModal({
     try {
       await updateDoc(doc(db, "posts", postId), {
         postMessage: postDetails,
-        latestEdit: new Date().toLocaleString(),
+        latestEdit: new Date().toISOString(),
       });
 
       setModalOpen(false);
@@ -90,8 +83,8 @@ export default function PostItModal({
   return (
     <StyledModal open={modalOpen} onClose={(e) => setModalOpen(false)}>
       <Box
-        width={520}
-        height={330}
+        width={500}
+        height={300}
         p="20px 25px"
         borderRadius={5}
         bgcolor={"background.default"}
@@ -107,7 +100,7 @@ export default function PostItModal({
         <TextField
           variant="standard"
           multiline
-          rows={4}
+          rows={3}
           placeholder="What's on your mind?"
           sx={{ width: "100%", marginBottom: "2rem" }}
           onChange={(e) => setPostDetails(e.target.value)}

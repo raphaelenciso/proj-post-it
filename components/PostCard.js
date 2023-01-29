@@ -40,11 +40,6 @@ export default function PostCard({ post }) {
 
   const handleEdit = async () => {
     setModalOpen(true);
-    // try {
-    //   router.push("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
@@ -92,9 +87,7 @@ export default function PostCard({ post }) {
             onClick={!postFocus ? () => router.push(`/${userUid}/${id}`) : null}
             sx={{ cursor: "pointer" }}
           >
-            <Typography variant="body2" color="text.secondary">
-              {postMessage}
-            </Typography>
+            <Typography variant="h5">{postMessage}</Typography>
           </CardContent>
         </Card>
       )}

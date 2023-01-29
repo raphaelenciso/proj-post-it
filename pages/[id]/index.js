@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Head from "next/head";
 
 import Navbar from "../../components/Navbar";
 import Profile from "../../components/Profile";
@@ -34,15 +35,20 @@ const Index = ({ user, userPosts }) => {
   const { displayName, photoURL } = user;
 
   return (
-    <Box sx={{ backgroundColor: "#EEF0F1" }}>
-      <Navbar />
+    <>
+      <Head>
+        <title>{displayName} | Post It</title>
+      </Head>
+      <Box sx={{ backgroundColor: "#F5F5F5" }}>
+        <Navbar />
 
-      <Profile
-        displayName={displayName}
-        photoURL={photoURL}
-        userPosts={userPosts}
-      />
-    </Box>
+        <Profile
+          displayName={displayName}
+          photoURL={photoURL}
+          userPosts={userPosts}
+        />
+      </Box>
+    </>
   );
 };
 
