@@ -12,7 +12,7 @@ import styled from "@mui/system/styled";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
-import faviconLogo from "../public/favicon.svg";
+import faviconLogo from "../public/favicon.ico";
 import PostItModal from "./PostItModal";
 import Link from "../src/Link";
 import { auth, provider, db } from "../lib/firebase";
@@ -90,7 +90,7 @@ export default function Navbar() {
                   display: { xs: "none", sm: "flex" },
                   fontFamily: "monospace",
                   fontWeight: 700,
-                  letterSpacing: ".1rem",
+                  letterSpacing: ".3rem",
                   color: "inherit",
                   textDecoration: "none",
                 }}
