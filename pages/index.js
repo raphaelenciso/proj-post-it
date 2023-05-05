@@ -26,6 +26,8 @@ export async function getServerSideProps() {
     query(collection(db, "posts"), orderBy("dateCreated", "desc"), limit(LIMIT))
   );
 
+  //this is just a test
+
   const posts = res.docs.map((doc) => {
     return { id: doc.id, ...doc.data() };
   });
